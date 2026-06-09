@@ -177,4 +177,4 @@ This project is licensed under the **GNU General Public License v3.0** — see t
 
 ## Author
 
-**Taurus McLure** — taurus@mail.ru
+**Taurus McLure** — taurus@mclure.ru
