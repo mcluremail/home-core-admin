@@ -5,10 +5,10 @@ from functools import wraps
 import dns.resolver
 
 # Импортируем модули авторизации и конфигурации
-from auth import init_auth, login_required, check_auth_struct
-from config import get_settings, save_settings, init_logging, SETTINGS_FILE
+from auth import init_auth, login_required, check_auth_struct, change_password
+from config import get_settings, save_settings, init_logging, SETTINGS_FILE, deep_merge
 # >>> ИСПРАВЛЕНИЕ: добавлен clear_dns_cache
-from dns_api import api_data, add_record, edit_record, delete_record, fix_missing_ptr, validate_zone, debug as api_debug, clear_dns_cache, ns_update, _cache_lock, _cache
+from dns_api import api_data, add_record, edit_record, delete_record, fix_missing_ptr, validate_zone, debug as api_debug, clear_dns_cache, ns_update
 from reservations import list_reservations, add_reservation, delete_reservation, update_reservation
 
 app = Flask(__name__)
@@ -107,6 +107,29 @@ def update_settings_route():
         return jsonify({"success": True, "restart_needed": restart_needed})
     except Exception as e:
         logger.error(f"SETTINGS ERROR | IP:{request.remote_addr} | {str(e)}")
+        return jsonify({"success": False, "error": str(e)}), 500
+
+@app.route('/api/change-password', methods=['POST'])
+@login_required
+@csrf_token_required
+def api_change_password():
+    try:
+        data = request.json
+        if not data:
+            return jsonify({"success": False, "error": "Empty payload"}), 400
+        old_pwd = data.get("old_password", "")
+        new_pwd = data.get("new_password", "")
+        if not old_pwd or not new_pwd:
+            return jsonify({"success": False, "error": "Старый и новый пароль обязательны"}), 400
+        if len(new_pwd) < 4:
+            return jsonify({"success": False, "error": "Новый пароль: минимум 4 символа"}), 400
+        if not check_password_hash(check_auth_struct(), old_pwd):
+            return jsonify({"success": False, "error": "Неверный текущий пароль"}), 403
+        change_password(new_pwd)
+        logger.info(f"PASSWORD CHANGED | IP:{request.remote_addr}")
+        return jsonify({"success": True, "message": "Пароль изменён"})
+    except Exception as e:
+        logger.error(f"PASSWORD CHANGE ERROR | IP:{request.remote_addr} | {str(e)}")
         return jsonify({"success": False, "error": str(e)}), 500
 
 @app.route('/api/login', methods=['POST'])
@@ -282,23 +305,6 @@ def dns_lookup():
         return jsonify({"success": False, "error": "DNS query timed out"})
     except Exception as e:
         return jsonify({"success": False, "error": str(e)})
-
-@app.route('/api/events')
-def sse_events():
-    import time, json as json_mod
-    def event_stream():
-        last_time = 0
-        while True:
-            now = time.time()
-            data_ts = _cache["timestamp"]
-            if data_ts > last_time:
-                last_time = data_ts
-                # Send update event (no data - client can re-fetch)
-                yield f"event: update\ndata: {data_ts}\n\n"
-            # Send heartbeat every 30s
-            time.sleep(2)
-    return Response(event_stream(), mimetype="text/event-stream",
-                    headers={"Cache-Control": "no-store", "X-Accel-Buffering": "no"})
 
 @app.route('/')
 def index():

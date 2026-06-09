@@ -159,7 +159,7 @@ body.is-auth .auth-only{display:inline-flex !important}
       <button id="reset-btn" class="btn" title="Сбросить фильтры" style="margin-left:4px"><svg class="icon" viewBox="0 0 24 24"><path d="M12 5V1L7 6l5 5V7c3.31 0 6 2.69 6 6s-2.69 6-6 6-6-2.69-6-6H4c0 4.42 3.58 8 8 8s8-3.58 8-8-3.58-8-8-8z"/></svg> Сброс</button>
       <div class="action-group">
         <button id="audit-btn" class="btn auth-only" onclick="showAudit()"><svg class="icon" viewBox="0 0 24 24"><path d="M14 2H6c-1.1 0-1.99.9-1.99 2L4 20c0 1.1.89 2 1.99 2H18c1.1 0 2-.9 2-2V8l-6-6zm2 16H8v-2h8v2zm0-4H8v-2h8v2zm-3-5V3.5L18.5 9H13z"/></svg> Аудит</button>
-        <button id="lookup-btn" class="btn" onclick="toggleLookup()"><svg class="icon" viewBox="0 0 24 24"><path d="M15.5 14h-.79l-.28-.27C15.41 12.59 16 11.11 16 9.5 16 5.91 13.09 3 9.5 3S3 5.91 3 9.5 5.91 16 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z"/></svg> Lookup</button><svg class="icon" viewBox="0 0 24 24"><path d="M19.14 12.94c.04-.3.06-.61.06-.94 0-.32-.02-.64-.07-.94l2.03-1.58c.18-.14.23-.41.12-.61l-1.92-3.32c-.12-.22-.37-.29-.59-.22l-2.39.96c-.5-.38-1.03-.7-1.62-.94l-.36-2.54c-.04-.24-.24-.41-.48-.41h-3.84c-.24 0-.43.17-.47.41l-.36 2.54c-.59.24-1.13.57-1.62.94l-2.39-.96c-.22-.08-.47 0-.59.22L2.74 8.87c-.12.21-.08.47.12.61l2.03 1.58c-.05.3-.09.63-.09.94s.02.64.07.94l-2.03 1.58c-.18.14-.23.41-.12.61l1.92 3.32c.12.22.37.29.59.22l2.39-.96c.5.38 1.03.7 1.62.94l.36 2.54c.05.24.24.41.48.41h3.84c.24 0 .44-.17.47-.41l.36-2.54c.59-.24 1.13-.56 1.62-.94l2.39.96c.22.08.47 0 .59-.22l1.92-3.32c.12-.22.07-.47-.12-.61l-2.01-1.58zM12 15.6c-1.98 0-3.6-1.62-3.6-3.6s1.62-3.6 3.6-3.6 3.6 1.62 3.6 3.6-1.62 3.6-3.6 3.6z"/></svg> Настройки</button>
+        <button id="lookup-btn" class="btn" onclick="toggleLookup()"><svg class="icon" viewBox="0 0 24 24"><path d="M15.5 14h-.79l-.28-.27C15.41 12.59 16 11.11 16 9.5 16 5.91 13.09 3 9.5 3S3 5.91 3 9.5 5.91 16 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z"/></svg> Lookup</button><button id="settings-btn" class="btn auth-only" onclick="openSettings()"><svg class="icon" viewBox="0 0 24 24"><path d="M19.14 12.94c.04-.3.06-.61.06-.94 0-.32-.02-.64-.07-.94l2.03-1.58c.18-.14.23-.41.12-.61l-1.92-3.32c-.12-.22-.37-.29-.59-.22l-2.39.96c-.5-.38-1.03-.7-1.62-.94l-.36-2.54c-.04-.24-.24-.41-.48-.41h-3.84c-.24 0-.43.17-.47.41l-.36 2.54c-.59.24-1.13.57-1.62.94l-2.39-.96c-.22-.08-.47 0-.59.22L2.74 8.87c-.12.21-.08.47.12.61l2.03 1.58c-.05.3-.09.63-.09.94s.02.64.07.94l-2.03 1.58c-.18.14-.23.41-.12.61l1.92 3.32c.12.22.37.29.59.22l2.39-.96c.5.38 1.03.7 1.62.94l.36 2.54c.05.24.24.41.48.41h3.84c.24 0 .44-.17.47-.41l.36-2.54c.59-.24 1.13-.56 1.62-.94l2.39.96c.22.08.47 0 .59-.22l1.92-3.32c.12-.22.07-.47-.12-.61l-2.01-1.58zM12 15.6c-1.98 0-3.6-1.62-3.6-3.6s1.62-3.6 3.6-3.6 3.6 1.62 3.6 3.6-1.62 3.6-3.6 3.6z"/></svg> Настройки</button>
         <button id="refresh-btn" class="btn"><svg class="icon" viewBox="0 0 24 24"><path d="M17.65 6.35C16.2 4.9 14.21 4 12 4c-4.42 0-7.99 3.58-7.99 8s3.57 8 7.99 8c3.73 0 6.84-2.55 7.73-6h-2.08c-.82 2.33-3.04 4-5.65 4-3.31 0-6-2.69-6-6s2.69-6 6-6c1.66 0 3.14.69 4.22 1.78L13 11h7V4l-2.35 2.35z"/></svg> Обновить</button>
         <button id="add-btn" class="btn btn-primary auth-only" onclick="showAdd()"><svg class="icon" viewBox="0 0 24 24"><path d="M19 13h-6v6h-2v-6H5v-2h6V5h2v6h6v2z"/></svg> Добавить</button>
         <button id="auth-btn" class="btn" onclick="toggleAuth()"><svg class="icon" viewBox="0 0 24 24"><path d="M18 8h-1V6c0-2.76-2.24-5-5-5S7 3.24 7 6v2H6c-1.1 0-2 .9-2 2v10c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V10c0-1.1-.9-2-2-2zm-6 9c-1.1 0-2-.9-2-2s.9-2 2-2 2 .9 2 2-.9 2-2 2zm3.1-9H8.9V6c0-1.71 1.39-3.1 3.1-3.1 1.71 0 3.1 1.39 3.1 3.1v2z"/></svg> Войти</button>
@@ -199,20 +199,22 @@ body.is-auth .auth-only{display:inline-flex !important}
   </div>
 </div>
 
-<div id="m" class="modal"><div class="modal-box"><h3 id="modal-title" style="margin-top:0">Новая запись</h3><select id="m-z"></select><input id="m-n" placeholder="Имя (например: server1)"><select id="m-rtype" onchange="updateTypeHint()"><option value="A">A (IPv4)</option><option value="AAAA">AAAA (IPv6)</option><option value="CNAME">CNAME</option><option value="MX">MX</option><option value="TXT">TXT</option><option value="SRV">SRV</option><option value="NS">NS</option><option value="PTR">PTR</option><option value="CAA">CAA</option><option value="SPF">SPF</option><option value="NAPTR">NAPTR</option><option value="TLSA">TLSA</option><option value="SSHFP">SSHFP</option><option value="URI">URI</option><option value="SVCB">SVCB</option><option value="HTTPS">HTTPS</option><option value="DNSKEY">DNSKEY</option><option value="DS">DS</option></select><div id="m-type-hint"></div><input id="m-d" placeholder="Значение"><label id="m-ptr-l" style="display:none;align-items:center;gap:8px;margin:8px 0;cursor:pointer;font-size:13px"><input type="checkbox" id="m-ptr" checked> <span id="m-ptr-text">Создать PTR</span></label><input id="m-ttl" type="number" value="3600" placeholder="TTL"><div style="display:flex;gap:8px;margin-top:16px"><button class="btn" id="modal-cancel" style="flex:1">Отмена</button><button class="btn btn-primary" id="modal-save" style="flex:1">Сохранить</button></div></div></div>
+<div id="m" class="modal"><div class="modal-box"><h3 id="modal-title" style="margin-top:0">Новая запись</h3><select id="m-z"></select><input id="m-n" placeholder="Имя (например: server1)" autocomplete="off"><select id="m-rtype" onchange="updateTypeHint()"><option value="A">A (IPv4)</option><option value="AAAA">AAAA (IPv6)</option><option value="CNAME">CNAME</option><option value="MX">MX</option><option value="TXT">TXT</option><option value="SRV">SRV</option><option value="NS">NS</option><option value="PTR">PTR</option><option value="CAA">CAA</option><option value="SPF">SPF</option><option value="NAPTR">NAPTR</option><option value="TLSA">TLSA</option><option value="SSHFP">SSHFP</option><option value="URI">URI</option><option value="SVCB">SVCB</option><option value="HTTPS">HTTPS</option><option value="DNSKEY">DNSKEY</option><option value="DS">DS</option></select><div id="m-type-hint"></div><input id="m-d" placeholder="Значение" autocomplete="off"><label id="m-ptr-l" style="display:none;align-items:center;gap:8px;margin:8px 0;cursor:pointer;font-size:13px"><input type="checkbox" id="m-ptr" checked> <span id="m-ptr-text">Создать PTR</span></label><input id="m-ttl" type="number" value="3600" placeholder="TTL" autocomplete="off"><div style="display:flex;gap:8px;margin-top:16px"><button class="btn" id="modal-cancel" style="flex:1">Отмена</button><button class="btn btn-primary" id="modal-save" style="flex:1">Сохранить</button></div></div></div>
 
-<div id="lookup-modal" class="modal"><div class="modal-box" style="width:520px"><h3 style="margin-top:0">🔎 DNS Lookup</h3>
-  <div style="display:flex;gap:8px;margin-bottom:12px;align-items:center">
-    <input id="lk-name" placeholder="Имя (server1.mclure.ru)" style="flex:1;padding:8px;border-radius:8px;border:1px solid var(--brd);background:var(--bg);color:var(--txt);font-size:13px">
-    <select id="lk-type" style="padding:8px;border-radius:8px;border:1px solid var(--brd);background:var(--bg);color:var(--txt);font-size:13px;cursor:pointer">
-      <option value="A">A</option><option value="AAAA">AAAA</option><option value="CNAME">CNAME</option><option value="MX">MX</option><option value="TXT">TXT</option><option value="NS">NS</option><option value="PTR">PTR</option><option value="SOA">SOA</option><option value="CAA">CAA</option><option value="SRV">SRV</option>
-    </select>
-    <button class="btn btn-primary" id="lk-btn" onclick="doLookup()">🔎</button>
+<div id="lookup-modal" class="modal"><div class="modal-box" style="width:460px"><h3 style="margin-top:0">🔎 DNS Lookup</h3>
+  <div style="display:flex;flex-direction:column;gap:8px;margin-bottom:12px">
+    <input id="lk-name" placeholder="example.com или любое имя" style="width:100%;padding:8px;border-radius:8px;border:1px solid var(--brd);background:var(--bg);color:var(--txt);font-size:13px;box-sizing:border-box" autocomplete="off" onkeydown="if(event.key==='Enter')doLookup()">
+    <div style="display:flex;gap:8px;flex-wrap:wrap">
+      <select id="lk-type" style="flex:1;min-width:120px;padding:8px;border-radius:8px;border:1px solid var(--brd);background:var(--bg);color:var(--txt);font-size:13px;cursor:pointer">
+        <option value="A">A</option><option value="AAAA">AAAA</option><option value="CNAME">CNAME</option><option value="MX">MX</option><option value="TXT">TXT</option><option value="NS">NS</option><option value="PTR">PTR</option><option value="SOA">SOA</option><option value="SRV">SRV</option><option value="CAA">CAA</option>
+      </select>
+      <button class="btn btn-primary" id="lk-btn" onclick="doLookup()" style="flex-shrink:0">🔎 Запросить</button>
+    </div>
   </div>
-  <pre id="lk-result" style="background:var(--bg);padding:12px;border-radius:8px;font-size:12px;max-height:300px;overflow:auto;margin:0;white-space:pre-wrap">Введите имя и нажмите 🔎</pre>
+  <pre id="lk-result" style="background:var(--bg);padding:12px;border-radius:8px;font-size:12px;max-height:300px;overflow:auto;margin:0;white-space:pre-wrap">Ожидание запроса...</pre>
   <div style="display:flex;gap:8px;margin-top:12px"><button class="btn" onclick="document.getElementById('lookup-modal').style.display='none'" style="flex:1">Закрыть</button></div>
 </div></div>
-<div id="login-modal" class="modal"><div class="modal-box" style="width:340px;text-align:center"><h3 style="margin-top:0">🔐 Авторизация</h3><input id="login-pwd" type="password" placeholder="Пароль администратора" onkeydown="if(event.key==='Enter')doLogin()"><div style="display:flex;gap:8px;margin-top:16px"><button class="btn" onclick="document.getElementById('login-modal').style.display='none'" style="flex:1">Отмена</button><button class="btn btn-primary" onclick="doLogin()" style="flex:1">Войти</button></div></div></div>
+<div id="login-modal" class="modal"><div class="modal-box" style="width:340px;text-align:center"><form autocomplete="off"><h3 style="margin-top:0">🔐 Авторизация</h3><input id="login-pwd" type="password" placeholder="Пароль администратора" autocomplete="new-password" onkeydown="if(event.key==='Enter')doLogin()"><div style="display:flex;gap:8px;margin-top:16px"><button class="btn" onclick="document.getElementById('login-modal').style.display='none'" style="flex:1">Отмена</button><button class="btn btn-primary" onclick="doLogin()" style="flex:1">Войти</button></div></form></div></div>
 <div id="settings-modal" class="modal"><div class="modal-box"><h3 style="margin-top:0">⚙ Настройки Home Core</h3>
   <div class="settings-group"><span class="settings-label"><svg class="icon" viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 17.93c-3.95-.49-7-3.85-7-7.93 0-.62.08-1.22.21-1.79L9 15v1c0 1.1.9 2 2 2v1.93zm6.9-2.54c-.26-.81-1-1.39-1.9-1.39h-1v-3c0-.55-.45-1-1-1H8v-2h2c.55 0 1-.45 1-1V7h2c1.1 0 2-.9 2-2v-.41c2.93 1.19 5 4.06 5 7.41 0 2.08-.8 3.97-2.1 5.39z"/></svg> Сеть и сервисы</span>
     <div class="settings-grid"><div><label class="settings-label">Host статистики BIND</label><input id="s-stats-host"><label class="settings-label">BIND сервер (nsupdate/AXFR)</label><input id="s-bind-host"></div><div><label class="settings-label">Port статистики</label><input id="s-stats-port" type="number"></div></div>
@@ -233,6 +235,14 @@ body.is-auth .auth-only{display:inline-flex !important}
   <div class="settings-group"><span class="settings-label"><svg class="icon" viewBox="0 0 24 24"><path d="M18 8h-1V6c0-2.76-2.24-5-5-5S7 3.24 7 6v2H6c-1.1 0-2 .9-2 2v10c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V10c0-1.1-.9-2-2-2zm-6 9c-1.1 0-2-.9-2-2s.9-2 2-2 2 .9 2 2-.9 2-2 2zm3.1-9H8.9V6c0-1.71 1.39-3.1 3.1-3.1 1.71 0 3.1 1.39 3.1 3.1v2z"/></svg> Безопасность</span>
     <label class="settings-label">Secret Key (смена сбросит сессии)</label><input id="s-secret-key">
     <div class="settings-grid"><div><label class="settings-label">SameSite</label><select id="s-samesite"><option value="Lax">Lax</option><option value="Strict">Strict</option><option value="None">None</option></select></div><div><label class="settings-label">HttpOnly</label><select id="s-httponly"><option value="true">Вкл</option><option value="false">Выкл</option></select></div></div>
+    <hr style="border:none;border-top:1px solid var(--brd);margin:12px 0">
+    <span class="settings-label">Смена пароля администратора</span>
+    <input id="s-old-pwd" type="password" autocomplete="new-password" placeholder="Текущий пароль" style="margin-bottom:6px">
+    <div style="display:flex;gap:6px">
+      <input id="s-new-pwd" type="password" autocomplete="new-password" placeholder="Новый пароль" style="flex:1">
+      <input id="s-new-pwd2" type="password" autocomplete="new-password" placeholder="Повторите" style="flex:1">
+    </div>
+    <button class="btn" id="s-change-pwd-btn" onclick="changePassword()" style="margin-top:6px;font-size:12px">🔑 Сменить пароль</button>
   </div>
   <div id="s-restart-warn" class="restart-warn">⚠ Изменены параметры, требующие перезапуска приложения.</div>
   <div style="display:flex;gap:8px;margin-top:16px"><button class="btn" onclick="document.getElementById('settings-modal').style.display='none'" style="flex:1">Отмена</button><button class="btn btn-primary" id="s-save-btn" onclick="saveSettings()" style="flex:1"><svg class="icon" viewBox="0 0 24 24"><path d="M19 12v7H5v-7H3v7c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2v-7h-2zm-6 .67l2.59-2.58L17 11.5l-5 5-5-5 1.41-1.41L11 12.67V3h2z"/></svg> Сохранить</button></div>
@@ -250,7 +260,7 @@ body.is-auth .auth-only{display:inline-flex !important}
     <button class="btn" onclick="document.getElementById('audit-modal').style.display='none'" style="flex:1">Закрыть</button>
   </div>
 </div></div>
-<div id="res-modal" class="modal"><div class="modal-box"><h3 id="res-modal-title">Новая резервация</h3><input id="res-mac" placeholder="MAC-адрес (00:11:22:33:44:55)"><input id="res-ip" placeholder="IP-адрес"><input id="res-hostname" placeholder="Имя хоста (опционально)"><div style="display:flex; gap:8px; margin-top:16px;"><button class="btn" onclick="document.getElementById('res-modal').style.display='none'">Отмена</button><button class="btn btn-primary" id="res-save-btn" onclick="saveReservation()">Сохранить</button></div></div></div>
+<div id="res-modal" class="modal"><div class="modal-box"><h3 id="res-modal-title">Новая резервация</h3><input id="res-mac" placeholder="MAC-адрес (00:11:22:33:44:55)" autocomplete="off"><input id="res-ip" placeholder="IP-адрес"><input id="res-hostname" placeholder="Имя хоста (опционально)"><div style="display:flex; gap:8px; margin-top:16px;"><button class="btn" onclick="document.getElementById('res-modal').style.display='none'">Отмена</button><button class="btn btn-primary" id="res-save-btn" onclick="saveReservation()">Сохранить</button></div></div></div>
 <div id="toast-container" class="toast-container"></div>
 
 <script>
@@ -545,6 +555,28 @@ function toggleLookup() {
   if (m.style.display === 'flex') $('lk-name').focus();
 }
 
+// ---------- Смена пароля ----------
+async function changePassword() {
+  const oldPwd = $('s-old-pwd').value;
+  const newPwd = $('s-new-pwd').value;
+  const newPwd2 = $('s-new-pwd2').value;
+  if (!oldPwd || !newPwd) { toast('Заполните все поля', 'error'); return; }
+  if (newPwd !== newPwd2) { toast('Новые пароли не совпадают', 'error'); return; }
+  if (newPwd.length < 4) { toast('Минимум 4 символа', 'error'); return; }
+  setLoading('s-change-pwd-btn', true);
+  try {
+    const j = await api('/api/change-password', 'POST', { old_password: oldPwd, new_password: newPwd });
+    if (j.success) {
+      toast('Пароль изменён');
+      $('s-old-pwd').value = ''; $('s-new-pwd').value = ''; $('s-new-pwd2').value = '';
+    } else {
+      toast(j.error, 'error');
+    }
+  } catch (e) {
+    toast(e.message || 'Ошибка', 'error');
+  } finally { setLoading('s-change-pwd-btn', false); }
+}
+
 // ---------- Инициализация ----------
 document.addEventListener('DOMContentLoaded', async () => {
   try {
@@ -609,20 +641,14 @@ document.addEventListener('DOMContentLoaded', async () => {
       if (rm.style.display === 'flex') { saveReservation(); return; }
       const lm = $('login-modal');
       if (lm.style.display === 'flex') { doLogin(); return; }
+      const lkm = $('lookup-modal');
+      if (lkm.style.display === 'flex') { doLookup(); return; }
     }
   });
 
   updateTypeHint();
   load();
   startAuto();
-
-  // SSE: real-time updates on cache change
-  if (window.EventSource) {
-    const es = new EventSource('/api/events');
-    es.addEventListener('update', () => {
-      if (!$('m').style.display.includes('flex')) load();
-    });
-  }
 });
 </script>
 </body>
