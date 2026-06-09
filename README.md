@@ -178,3 +178,53 @@ This project is licensed under the **GNU General Public License v3.0** — see t
 ## Author
 
 **Taurus McLure** — taurus@mclure.ru
+## Remote BIND Setup
+
+The application communicates with BIND via:
+
+1. **Dynamic DNS updates** (nsupdate) — TCP port 53
+2. **Zone transfers** (AXFR) — TCP port 53
+3. **Statistics channel** — HTTP port (custom, default 8053)
+
+By default, all connections go to `127.0.0.1` (local BIND). To manage a **remote** BIND server:
+
+### BIND configuration (on the remote DNS server)
+
+```conf
+# /etc/named.conf — allow queries, updates and transfers from the app host
+options {
+    listen-on { 127.0.0.1; 192.168.1.0/24; };  # your app server subnet
+    allow-query { localhost; 192.168.1.0/24; };
+    allow-update { localhost; 192.168.1.100; };  # app server IP
+};
+
+# Per-zone: allow AXFR from the app server
+zone "mclure.ru" IN {
+    type master;
+    file "/var/named/mclure.ru.zone";
+    allow-transfer { localhost; 192.168.1.100; };  # app server IP
+};
+```
+
+### Statistics channel (optional, but recommended)
+
+```conf
+statistics-channels {
+    inet 192.168.1.4 port 8053 allow { 192.168.1.100; };
+};
+```
+
+### Application settings
+
+Change `settings.json` on the app server:
+
+```json
+{
+  "network": {
+    "stats_host": "192.168.1.4",
+    "stats_port": 8053
+  }
+}
+```
+
+> **Note:** AXFR and dynamic DNS updates in `dns_api.py` currently use hardcoded `127.0.0.1`. For a remote BIND setup, these need to be changed to the remote server's IP. This will be made configurable in a future release.
