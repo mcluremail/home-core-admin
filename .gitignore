@@ -6,4 +6,4 @@ __pycache__/
 audit.log
 admin.pass
 settings.json
-*.sock
+*.sock*.bak
