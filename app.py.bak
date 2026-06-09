@@ -1,14 +1,13 @@
 import os, secrets, logging
-from flask import Flask, render_template, jsonify, request, session, Response
+from flask import Flask, render_template, jsonify, request, session
 from werkzeug.security import check_password_hash
 from functools import wraps
-import dns.resolver
 
 # Импортируем модули авторизации и конфигурации
 from auth import init_auth, login_required, check_auth_struct
 from config import get_settings, save_settings, init_logging, SETTINGS_FILE
 # >>> ИСПРАВЛЕНИЕ: добавлен clear_dns_cache
-from dns_api import api_data, add_record, edit_record, delete_record, fix_missing_ptr, validate_zone, debug as api_debug, clear_dns_cache, ns_update, _cache_lock, _cache
+from dns_api import api_data, add_record, edit_record, delete_record, fix_missing_ptr, validate_zone, debug as api_debug, clear_dns_cache
 from reservations import list_reservations, add_reservation, delete_reservation, update_reservation
 
 app = Flask(__name__)
@@ -222,7 +221,7 @@ def api_create_reservation():
     if not mac or not ip:
         return jsonify({"success": False, "error": "MAC и IP обязательны"})
     from dns_api import ns_update
-    ns_update(zone, name, 'DHCID', '', 'delete', bind_host=settings["network"]["bind_host"])
+    ns_update(zone, name, 'DHCID', '', 'delete')
     ok, msg = add_reservation(mac, ip, hostname)
     if ok:
         # >>> ИСПРАВЛЕНИЕ: сброс кэша
@@ -236,69 +235,15 @@ def get_audit():
     try:
         log_path = settings["paths"]["audit_log"]
         if not os.path.exists(log_path):
-            return jsonify({"lines": [], "total": 0})
-        offset = int(request.args.get('offset', 0))
-        limit = min(int(request.args.get('limit', 50)), 200)
-        search = request.args.get('q', '').lower()
-
+            return jsonify({"lines": []})
         with open(log_path, 'r') as f:
-            all_lines = [l.strip() for l in f.readlines()]
-        if search:
-            all_lines = [l for l in all_lines if search in l.lower()]
-        total = len(all_lines)
-        page = all_lines[-offset - limit:] if offset else all_lines[-limit:]
-        if len(page) > limit:
-            page = page[:limit]
-        return jsonify({"lines": page, "total": total, "offset": offset, "limit": limit})
-    except Exception as e:
-        return jsonify({"lines": [], "total": 0, "error": str(e)})
+            return jsonify({"lines": [l.strip() for l in f.readlines()[-50:]]})
+    except:
+        return jsonify({"lines": []})
 
 @app.route('/api/debug')
 def debug_route():
     return api_debug(settings)
-
-
-
-@app.route('/api/dns-lookup')
-def dns_lookup():
-    name = request.args.get('name', '').strip()
-    rtype = request.args.get('type', 'A').strip().upper()
-    if not name:
-        return jsonify({"success": False, "error": "Name required"})
-    try:
-        bind_host = settings["network"]["bind_host"]
-        resolver = dns.resolver.Resolver()
-        resolver.nameservers = [bind_host]
-        resolver.timeout = 3
-        resolver.lifetime = 5
-        answers = resolver.resolve(name, rtype, raise_on_no_answer=False)
-        records = [str(r) for r in answers]
-        return jsonify({"success": True, "name": name, "type": rtype, "records": records, "ttl": answers.rrset.ttl if answers.rrset else None})
-    except dns.resolver.NoAnswer:
-        return jsonify({"success": True, "name": name, "type": rtype, "records": [], "note": "No records found"})
-    except dns.resolver.NXDOMAIN:
-        return jsonify({"success": False, "error": "NXDOMAIN - domain not found"})
-    except dns.exception.Timeout:
-        return jsonify({"success": False, "error": "DNS query timed out"})
-    except Exception as e:
-        return jsonify({"success": False, "error": str(e)})
-
-@app.route('/api/events')
-def sse_events():
-    import time, json as json_mod
-    def event_stream():
-        last_time = 0
-        while True:
-            now = time.time()
-            data_ts = _cache["timestamp"]
-            if data_ts > last_time:
-                last_time = data_ts
-                # Send update event (no data - client can re-fetch)
-                yield f"event: update\ndata: {data_ts}\n\n"
-            # Send heartbeat every 30s
-            time.sleep(2)
-    return Response(event_stream(), mimetype="text/event-stream",
-                    headers={"Cache-Control": "no-store", "X-Accel-Buffering": "no"})
 
 @app.route('/')
 def index():

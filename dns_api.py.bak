@@ -25,7 +25,7 @@ def is_valid_ipv4(ip):
     try: return len(ip.split('.')) == 4 and all(0 <= int(p) <= 255 for p in ip.split('.'))
     except: return False
 
-def ns_update(zone, name, rtype, data, action="add", ttl=3600, bind_host="127.0.0.1"):
+def ns_update(zone, name, rtype, data, action="add", ttl=3600):
     """Выполнение DNS-обновления через dnspython. Возвращает (успех, сообщение)."""
     def clean(s): return re.sub(r'[\r\n\x00]', '', str(s))
     if not is_valid_hostname(zone) or not is_valid_hostname(name):
@@ -70,7 +70,7 @@ def ns_update(zone, name, rtype, data, action="add", ttl=3600, bind_host="127.0.
             rdtype = dns.rdatatype.from_text(rtype)
             update.add(fqdn, ttl, rdtype, data)
 
-        response = dns.query.tcp(update, bind_host, timeout=5)
+        response = dns.query.tcp(update, '127.0.0.1', timeout=5)
         if response.rcode() != dns.rcode.NOERROR:
             return False, f"DNS update failed: {dns.rcode.to_text(response.rcode())}"
         return True, ""
@@ -228,7 +228,7 @@ def api_data(settings):
 
     for zone in zones:
         try:
-            z_axfr = dns.zone.from_xfr(dns.query.xfr(settings["network"]["bind_host"], zone, timeout=3))
+            z_axfr = dns.zone.from_xfr(dns.query.xfr('127.0.0.1', zone, timeout=3))
             count = 0
             for name, node in z_axfr.nodes.items():
                 fname = str(name.derelativize(z_axfr.origin)).strip('.')
@@ -285,12 +285,12 @@ def add_record(data, settings):
     if not all(k in data for k in ['zone','name','type','data']): return jsonify({"success": False, "error": "Missing fields"})
     ttl = int(data.get('ttl', settings["dns"]["default_ttl"]))
     if ttl < 0: return jsonify({"success": False, "error": "Invalid TTL"})
-    ok, err = ns_update(data['zone'], data['name'], data['type'], data['data'], "add", ttl, settings["network"]["bind_host"])
+    ok, err = ns_update(data['zone'], data['name'], data['type'], data['data'], "add", ttl)
     if ok and data.get('ptr', settings["dns"]["auto_ptr"]) and data['type']=='A':
         try:
             pz, pn = find_ptr_zone(data['data'])
             if pz and pn:
-                ok_ptr, err_ptr = ns_update(pz, pn, "PTR", f"{data['name']}.{data['zone']}.", "add", ttl, settings["network"]["bind_host"])
+                ok_ptr, err_ptr = ns_update(pz, pn, "PTR", f"{data['name']}.{data['zone']}.", "add", ttl)
                 if not ok_ptr:
                     logger.warning(f"add_record: PTR creation failed for {data['data']}: {err_ptr}")
         except Exception as e:
@@ -302,11 +302,11 @@ def edit_record(data, settings):
     if not all(k in data for k in ['zone','name','type','old_data','new_data']): return jsonify({"success": False, "error": "Missing fields"})
     ttl = int(data.get('ttl', settings["dns"]["default_ttl"]))
     if ttl < 0: return jsonify({"success": False, "error": "Invalid TTL"})
-    ok_del, err_del = ns_update(data['zone'], data['name'], data['type'], data['old_data'], "delete", bind_host=settings["network"]["bind_host"])
+    ok_del, err_del = ns_update(data['zone'], data['name'], data['type'], data['old_data'], "delete")
     if not ok_del: return jsonify({"success": False, "error": f"Не удалось удалить старую запись: {err_del}"})
-    ok_add, err_add = ns_update(data['zone'], data['name'], data['type'], data['new_data'], "add", ttl, settings["network"]["bind_host"])
+    ok_add, err_add = ns_update(data['zone'], data['name'], data['type'], data['new_data'], "add", ttl)
     if not ok_add:
-        ns_update(data['zone'], data['name'], data['type'], data['old_data'], "add", ttl, settings["network"]["bind_host"])
+        ns_update(data['zone'], data['name'], data['type'], data['old_data'], "add", ttl)
         return jsonify({"success": False, "error": f"Не удалось создать новую запись: {err_add}"})
     # обновление PTR при редактировании A-записи (всегда)
     if data['type'] == 'A':
@@ -315,7 +315,7 @@ def edit_record(data, settings):
             try:
                 old_ptr_zone, old_ptr_num = find_ptr_zone(data['old_data'])
                 if old_ptr_zone and old_ptr_num:
-                    ok_ptr, err_ptr = ns_update(old_ptr_zone, old_ptr_num, "PTR", f"{data['name']}.{data['zone']}.", "delete", bind_host=settings["network"]["bind_host"])
+                    ok_ptr, err_ptr = ns_update(old_ptr_zone, old_ptr_num, "PTR", f"{data['name']}.{data['zone']}.", "delete")
                     if not ok_ptr:
                         logger.warning(f"edit_record: old PTR delete failed for {data['old_data']}: {err_ptr}")
             except Exception as e:
@@ -325,7 +325,7 @@ def edit_record(data, settings):
             try:
                 pz, pn = find_ptr_zone(data['new_data'])
                 if pz and pn:
-                    ok_ptr, err_ptr = ns_update(pz, pn, "PTR", f"{data['name']}.{data['zone']}.", "add", ttl, settings["network"]["bind_host"])
+                    ok_ptr, err_ptr = ns_update(pz, pn, "PTR", f"{data['name']}.{data['zone']}.", "add", ttl)
                     if not ok_ptr:
                         logger.warning(f"edit_record: new PTR creation failed for {data['new_data']}: {err_ptr}")
             except Exception as e:
@@ -335,12 +335,12 @@ def edit_record(data, settings):
 
 def delete_record(data, settings):
     if not all(k in data for k in ['zone','name','type','data']): return jsonify({"success": False, "error": "Missing fields"})
-    ok, _ = ns_update(data['zone'], data['name'], data['type'], data['data'], "delete", bind_host=settings["network"]["bind_host"])
+    ok, _ = ns_update(data['zone'], data['name'], data['type'], data['data'], "delete")
     if ok:
         # Если удаляется A-запись, пытаемся удалить и DHCID, чтобы убрать динамический хост
         if data['type'] == 'A':
             try:
-                ns_update(data['zone'], data['name'], 'DHCID', '', "delete", bind_host=settings["network"]["bind_host"])
+                ns_update(data['zone'], data['name'], 'DHCID', '', "delete")
             except:
                 pass
         clear_dns_cache()
@@ -350,7 +350,7 @@ def fix_missing_ptr(data, settings):
     if not all(k in data for k in ['zone','name','data']): return jsonify({"success": False, "error": "Missing fields"})
     pz, pn = find_ptr_zone(data['data'])
     if not pz or not pn: return jsonify({"success": False, "error": "Cannot determine reverse zone"})
-    ok, err = ns_update(pz, pn, "PTR", f"{data['name']}.", "add", int(data.get('ttl', settings["dns"]["default_ttl"])), settings["network"]["bind_host"])
+    ok, err = ns_update(pz, pn, "PTR", f"{data['name']}.", "add", int(data.get('ttl', settings["dns"]["default_ttl"])))
     if ok:
         clear_dns_cache()
     else:

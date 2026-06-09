@@ -5,7 +5,7 @@
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath fill='%236b7280' d='M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 17.93c-3.95-.49-7-3.85-7-7.93 0-.62.08-1.22.21-1.79L9 15v1c0 1.1.9 2 2 2v1.93zm6.9-2.54c-.26-.81-1-1.39-1.9-1.39h-1v-3c0-.55-.45-1-1-1H8v-2h2c.55 0 1-.45 1-1V7h2c1.1 0 2-.9 2-2v-.41c2.93 1.19 5 4.06 5 7.41 0 2.08-.8 3.97-2.1 5.39z'/%3E%3C/svg%3E" type="image/svg+xml">
 <style>
 :root{--bg:#f8fafc;--sidebar:#ffffff;--prim:#6b7280;--txt:#0F172A;--brd:#e2e8f0;--ok:#10b981;--err:#ef4444;--muted:#64748b;--shadow:0 4px 12px rgba(0,0,0,0.05)}
-[data-theme="dark"]{--bg:#0f172a !important;--sidebar:#1e293b !important;--prim:#e2e8f0 !important;--txt:#f1f5f9 !important;--brd:#334155 !important;--ok:#4ade80 !important;--err:#fca5a5 !important;--muted:#94a3b8 !important;--shadow:0 4px 12px rgba(0,0,0,0.5) !important}
+[data-theme="dark"]{--bg:#0b1120 !important;--sidebar:#111827 !important;--prim:#9ca3af !important;--txt:#f8fafc !important;--brd:#1f2937 !important;--ok:#34d399 !important;--err:#f87171 !important;--muted:#9ca3af !important;--shadow:0 4px 12px rgba(0,0,0,0.3) !important}
 [data-theme="light"]{--bg:#f8fafc !important;--sidebar:#ffffff !important;--prim:#6b7280 !important;--txt:#0F172A !important;--brd:#e2e8f0 !important;--ok:#10b981 !important;--err:#ef4444 !important;--muted:#64748b !important;--shadow:0 4px 12px rgba(0,0,0,0.05) !important}
 *{box-sizing:border-box;transition:background-color .25s ease,color .25s ease,border-color .25s ease,box-shadow .25s ease}
 body{font-family:system-ui,-apple-system,sans-serif;background:var(--bg);color:var(--txt);margin:0;display:flex;height:100vh;overflow:hidden;font-size:14px}
@@ -61,7 +61,7 @@ td:nth-child(5){text-align:left !important;padding-left:18px;padding-right:18px}
 td:last-child{width:65px;text-align:right}
 tr{min-height:54px}
 tr:hover td{background:rgba(107,114,128,0.04)}
-.hl{background:#fef08a;color:#1e293b;border-radius:2px;padding:0 1px}tr.row-exit td{opacity:0 !important;padding-top:0 !important;padding-bottom:0 !important;height:0 !important;overflow:hidden !important;border-bottom:none !important;transition:all .3s ease !important}
+tr.row-exit td{opacity:0 !important;padding-top:0 !important;padding-bottom:0 !important;height:0 !important;overflow:hidden !important;border-bottom:none !important;transition:all .3s ease !important}
 .type-badge{padding:3px 6px;border-radius:4px;font-size:10px;font-weight:600;display:inline-block;text-align:center;color:#374151}
 .type-badge.A{background:#dbeafe; color:#1e40af}
 .type-badge.AAAA{background:#e0f2fe; color:#0369a1}
@@ -115,7 +115,7 @@ textarea{resize:vertical;min-height:80px}
 .toast-container{position:fixed;top:20px;right:20px;z-index:1100;display:flex;flex-direction:column;gap:8px;pointer-events:none}
 .toast{background:var(--sidebar);border:1px solid var(--brd);border-radius:10px;padding:12px 16px;font-size:13px;animation:toastIn .25s ease;box-shadow:0 8px 16px rgba(0,0,0,0.12);pointer-events:auto;white-space:pre-wrap;display:flex;align-items:center;justify-content:space-between;gap:12px;backdrop-filter:blur(8px)}
 .toast.success{border-left:4px solid var(--ok)}.toast.error{border-left:4px solid var(--err)}
-.toast-close{cursor:pointer;opacity:0.5;font-size:12px;flex-shrink:0;padding:2px 4px;border-radius:4px;margin-left:4px}.toast-close:hover{opacity:1;background:rgba(0,0,0,0.06)}.toast-copy{cursor:pointer;opacity:0.6;font-size:14px;flex-shrink:0}
+.toast-copy{cursor:pointer;opacity:0.6;font-size:14px;flex-shrink:0}
 .toast-copy:hover{opacity:1}
 @keyframes toastIn{from{transform:translateX(24px);opacity:0}to{transform:translateX(0);opacity:1}}
 #audit-content{font-family:ui-monospace,SFMono-Regular,monospace;font-size:12px;white-space:pre-wrap;color:var(--txt);max-height:60vh;overflow-y:auto;background:var(--bg);padding:12px;border-radius:8px;border:1px solid var(--brd)}
@@ -159,7 +159,7 @@ body.is-auth .auth-only{display:inline-flex !important}
       <button id="reset-btn" class="btn" title="Сбросить фильтры" style="margin-left:4px"><svg class="icon" viewBox="0 0 24 24"><path d="M12 5V1L7 6l5 5V7c3.31 0 6 2.69 6 6s-2.69 6-6 6-6-2.69-6-6H4c0 4.42 3.58 8 8 8s8-3.58 8-8-3.58-8-8-8z"/></svg> Сброс</button>
       <div class="action-group">
         <button id="audit-btn" class="btn auth-only" onclick="showAudit()"><svg class="icon" viewBox="0 0 24 24"><path d="M14 2H6c-1.1 0-1.99.9-1.99 2L4 20c0 1.1.89 2 1.99 2H18c1.1 0 2-.9 2-2V8l-6-6zm2 16H8v-2h8v2zm0-4H8v-2h8v2zm-3-5V3.5L18.5 9H13z"/></svg> Аудит</button>
-        <button id="lookup-btn" class="btn" onclick="toggleLookup()"><svg class="icon" viewBox="0 0 24 24"><path d="M15.5 14h-.79l-.28-.27C15.41 12.59 16 11.11 16 9.5 16 5.91 13.09 3 9.5 3S3 5.91 3 9.5 5.91 16 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z"/></svg> Lookup</button><svg class="icon" viewBox="0 0 24 24"><path d="M19.14 12.94c.04-.3.06-.61.06-.94 0-.32-.02-.64-.07-.94l2.03-1.58c.18-.14.23-.41.12-.61l-1.92-3.32c-.12-.22-.37-.29-.59-.22l-2.39.96c-.5-.38-1.03-.7-1.62-.94l-.36-2.54c-.04-.24-.24-.41-.48-.41h-3.84c-.24 0-.43.17-.47.41l-.36 2.54c-.59.24-1.13.57-1.62.94l-2.39-.96c-.22-.08-.47 0-.59.22L2.74 8.87c-.12.21-.08.47.12.61l2.03 1.58c-.05.3-.09.63-.09.94s.02.64.07.94l-2.03 1.58c-.18.14-.23.41-.12.61l1.92 3.32c.12.22.37.29.59.22l2.39-.96c.5.38 1.03.7 1.62.94l.36 2.54c.05.24.24.41.48.41h3.84c.24 0 .44-.17.47-.41l.36-2.54c.59-.24 1.13-.56 1.62-.94l2.39.96c.22.08.47 0 .59-.22l1.92-3.32c.12-.22.07-.47-.12-.61l-2.01-1.58zM12 15.6c-1.98 0-3.6-1.62-3.6-3.6s1.62-3.6 3.6-3.6 3.6 1.62 3.6 3.6-1.62 3.6-3.6 3.6z"/></svg> Настройки</button>
+        <button id="settings-btn" class="btn auth-only" onclick="openSettings()"><svg class="icon" viewBox="0 0 24 24"><path d="M19.14 12.94c.04-.3.06-.61.06-.94 0-.32-.02-.64-.07-.94l2.03-1.58c.18-.14.23-.41.12-.61l-1.92-3.32c-.12-.22-.37-.29-.59-.22l-2.39.96c-.5-.38-1.03-.7-1.62-.94l-.36-2.54c-.04-.24-.24-.41-.48-.41h-3.84c-.24 0-.43.17-.47.41l-.36 2.54c-.59.24-1.13.57-1.62.94l-2.39-.96c-.22-.08-.47 0-.59.22L2.74 8.87c-.12.21-.08.47.12.61l2.03 1.58c-.05.3-.09.63-.09.94s.02.64.07.94l-2.03 1.58c-.18.14-.23.41-.12.61l1.92 3.32c.12.22.37.29.59.22l2.39-.96c.5.38 1.03.7 1.62.94l.36 2.54c.05.24.24.41.48.41h3.84c.24 0 .44-.17.47-.41l.36-2.54c.59-.24 1.13-.56 1.62-.94l2.39.96c.22.08.47 0 .59-.22l1.92-3.32c.12-.22.07-.47-.12-.61l-2.01-1.58zM12 15.6c-1.98 0-3.6-1.62-3.6-3.6s1.62-3.6 3.6-3.6 3.6 1.62 3.6 3.6-1.62 3.6-3.6 3.6z"/></svg> Настройки</button>
         <button id="refresh-btn" class="btn"><svg class="icon" viewBox="0 0 24 24"><path d="M17.65 6.35C16.2 4.9 14.21 4 12 4c-4.42 0-7.99 3.58-7.99 8s3.57 8 7.99 8c3.73 0 6.84-2.55 7.73-6h-2.08c-.82 2.33-3.04 4-5.65 4-3.31 0-6-2.69-6-6s2.69-6 6-6c1.66 0 3.14.69 4.22 1.78L13 11h7V4l-2.35 2.35z"/></svg> Обновить</button>
         <button id="add-btn" class="btn btn-primary auth-only" onclick="showAdd()"><svg class="icon" viewBox="0 0 24 24"><path d="M19 13h-6v6h-2v-6H5v-2h6V5h2v6h6v2z"/></svg> Добавить</button>
         <button id="auth-btn" class="btn" onclick="toggleAuth()"><svg class="icon" viewBox="0 0 24 24"><path d="M18 8h-1V6c0-2.76-2.24-5-5-5S7 3.24 7 6v2H6c-1.1 0-2 .9-2 2v10c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V10c0-1.1-.9-2-2-2zm-6 9c-1.1 0-2-.9-2-2s.9-2 2-2 2 .9 2 2-.9 2-2 2zm3.1-9H8.9V6c0-1.71 1.39-3.1 3.1-3.1 1.71 0 3.1 1.39 3.1 3.1v2z"/></svg> Войти</button>
@@ -184,9 +184,7 @@ body.is-auth .auth-only{display:inline-flex !important}
       <div class="sb-section"><span class="auto-badge" id="auto-dot" title="Автообновление таблицы"><span class="dot"></span> Авто</span></div>
     </div>
   </div>
-  <div id="reservations-main" style="display:none;flex-direction:column;flex:1;min-height:0;overflow:hidden">
-<div style="display:flex;gap:8px;margin-bottom:12px;align-items:center;flex-wrap:wrap">
-  <input id="res-search" placeholder="🔍 Поиск по MAC или IP..." style="flex:1;min-width:200px;padding:8px;border-radius:8px;border:1px solid var(--brd);background:var(--bg);color:var(--txt);font-size:13px" onkeyup="loadReservations()">
+  <div id="reservations-main" style="display:none; flex-direction: column; flex: 1; min-height: 0;">
     <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom:16px;">
       <h3 style="margin:0">Статические резервации</h3>
       <button class="btn btn-primary" onclick="showAddReservation()">+ Добавить</button>
@@ -200,22 +198,10 @@ body.is-auth .auth-only{display:inline-flex !important}
 </div>
 
 <div id="m" class="modal"><div class="modal-box"><h3 id="modal-title" style="margin-top:0">Новая запись</h3><select id="m-z"></select><input id="m-n" placeholder="Имя (например: server1)"><select id="m-rtype" onchange="updateTypeHint()"><option value="A">A (IPv4)</option><option value="AAAA">AAAA (IPv6)</option><option value="CNAME">CNAME</option><option value="MX">MX</option><option value="TXT">TXT</option><option value="SRV">SRV</option><option value="NS">NS</option><option value="PTR">PTR</option><option value="CAA">CAA</option><option value="SPF">SPF</option><option value="NAPTR">NAPTR</option><option value="TLSA">TLSA</option><option value="SSHFP">SSHFP</option><option value="URI">URI</option><option value="SVCB">SVCB</option><option value="HTTPS">HTTPS</option><option value="DNSKEY">DNSKEY</option><option value="DS">DS</option></select><div id="m-type-hint"></div><input id="m-d" placeholder="Значение"><label id="m-ptr-l" style="display:none;align-items:center;gap:8px;margin:8px 0;cursor:pointer;font-size:13px"><input type="checkbox" id="m-ptr" checked> <span id="m-ptr-text">Создать PTR</span></label><input id="m-ttl" type="number" value="3600" placeholder="TTL"><div style="display:flex;gap:8px;margin-top:16px"><button class="btn" id="modal-cancel" style="flex:1">Отмена</button><button class="btn btn-primary" id="modal-save" style="flex:1">Сохранить</button></div></div></div>
-
-<div id="lookup-modal" class="modal"><div class="modal-box" style="width:520px"><h3 style="margin-top:0">🔎 DNS Lookup</h3>
-  <div style="display:flex;gap:8px;margin-bottom:12px;align-items:center">
-    <input id="lk-name" placeholder="Имя (server1.mclure.ru)" style="flex:1;padding:8px;border-radius:8px;border:1px solid var(--brd);background:var(--bg);color:var(--txt);font-size:13px">
-    <select id="lk-type" style="padding:8px;border-radius:8px;border:1px solid var(--brd);background:var(--bg);color:var(--txt);font-size:13px;cursor:pointer">
-      <option value="A">A</option><option value="AAAA">AAAA</option><option value="CNAME">CNAME</option><option value="MX">MX</option><option value="TXT">TXT</option><option value="NS">NS</option><option value="PTR">PTR</option><option value="SOA">SOA</option><option value="CAA">CAA</option><option value="SRV">SRV</option>
-    </select>
-    <button class="btn btn-primary" id="lk-btn" onclick="doLookup()">🔎</button>
-  </div>
-  <pre id="lk-result" style="background:var(--bg);padding:12px;border-radius:8px;font-size:12px;max-height:300px;overflow:auto;margin:0;white-space:pre-wrap">Введите имя и нажмите 🔎</pre>
-  <div style="display:flex;gap:8px;margin-top:12px"><button class="btn" onclick="document.getElementById('lookup-modal').style.display='none'" style="flex:1">Закрыть</button></div>
-</div></div>
 <div id="login-modal" class="modal"><div class="modal-box" style="width:340px;text-align:center"><h3 style="margin-top:0">🔐 Авторизация</h3><input id="login-pwd" type="password" placeholder="Пароль администратора" onkeydown="if(event.key==='Enter')doLogin()"><div style="display:flex;gap:8px;margin-top:16px"><button class="btn" onclick="document.getElementById('login-modal').style.display='none'" style="flex:1">Отмена</button><button class="btn btn-primary" onclick="doLogin()" style="flex:1">Войти</button></div></div></div>
 <div id="settings-modal" class="modal"><div class="modal-box"><h3 style="margin-top:0">⚙ Настройки Home Core</h3>
   <div class="settings-group"><span class="settings-label"><svg class="icon" viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 17.93c-3.95-.49-7-3.85-7-7.93 0-.62.08-1.22.21-1.79L9 15v1c0 1.1.9 2 2 2v1.93zm6.9-2.54c-.26-.81-1-1.39-1.9-1.39h-1v-3c0-.55-.45-1-1-1H8v-2h2c.55 0 1-.45 1-1V7h2c1.1 0 2-.9 2-2v-.41c2.93 1.19 5 4.06 5 7.41 0 2.08-.8 3.97-2.1 5.39z"/></svg> Сеть и сервисы</span>
-    <div class="settings-grid"><div><label class="settings-label">Host статистики BIND</label><input id="s-stats-host"><label class="settings-label">BIND сервер (nsupdate/AXFR)</label><input id="s-bind-host"></div><div><label class="settings-label">Port статистики</label><input id="s-stats-port" type="number"></div></div>
+    <div class="settings-grid"><div><label class="settings-label">Host статистики BIND</label><input id="s-stats-host"></div><div><label class="settings-label">Port статистики</label><input id="s-stats-port" type="number"></div></div>
     <label class="settings-label">Файл аренд dnsmasq</label><input id="s-dnsmasq-leases">
   </div>
   <div class="settings-group"><span class="settings-label"><svg class="icon" viewBox="0 0 24 24"><path d="M20 6h-8l-2-2H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V8c0-1.1-.9-2-2-2zm0 12H4V8h16v10z"/></svg> Пути</span>
@@ -237,19 +223,7 @@ body.is-auth .auth-only{display:inline-flex !important}
   <div id="s-restart-warn" class="restart-warn">⚠ Изменены параметры, требующие перезапуска приложения.</div>
   <div style="display:flex;gap:8px;margin-top:16px"><button class="btn" onclick="document.getElementById('settings-modal').style.display='none'" style="flex:1">Отмена</button><button class="btn btn-primary" id="s-save-btn" onclick="saveSettings()" style="flex:1"><svg class="icon" viewBox="0 0 24 24"><path d="M19 12v7H5v-7H3v7c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2v-7h-2zm-6 .67l2.59-2.58L17 11.5l-5 5-5-5 1.41-1.41L11 12.67V3h2z"/></svg> Сохранить</button></div>
 </div></div>
-<div id="audit-modal" class="modal"><div class="modal-box" style="width:620px"><h3 style="margin-top:0">📋 Аудит действий</h3>
-  <div style="display:flex;gap:8px;margin-bottom:8px;align-items:center">
-    <input id="audit-q" placeholder="Поиск по логу..." style="flex:1;padding:8px;border-radius:8px;border:1px solid var(--brd);background:var(--bg);color:var(--txt);font-size:13px" onkeyup="loadAudit()">
-    <span id="audit-info" style="font-size:11px;color:var(--muted)"></span>
-  </div>
-  <pre id="audit-content" style="background:var(--bg);padding:12px;border-radius:8px;font-size:11px;max-height:400px;overflow:auto;margin:0">Загрузка...</pre>
-  <div style="display:flex;gap:8px;margin-top:8px;align-items:center">
-    <button class="btn" id="audit-prev" onclick="auditPage(-1)" style="font-size:12px">← Назад</button>
-    <span id="audit-page" style="font-size:12px;color:var(--muted);flex:1;text-align:center"></span>
-    <button class="btn" id="audit-next" onclick="auditPage(1)" style="font-size:12px">Вперед →</button>
-    <button class="btn" onclick="document.getElementById('audit-modal').style.display='none'" style="flex:1">Закрыть</button>
-  </div>
-</div></div>
+<div id="audit-modal" class="modal"><div class="modal-box" style="width:520px"><h3 style="margin-top:0">📋 Аудит действий (последние 50)</h3><div id="audit-content">Загрузка...</div><div style="display:flex;gap:8px;margin-top:16px"><button class="btn" onclick="document.getElementById('audit-modal').style.display='none'" style="flex:1">Закрыть</button></div></div></div>
 <div id="res-modal" class="modal"><div class="modal-box"><h3 id="res-modal-title">Новая резервация</h3><input id="res-mac" placeholder="MAC-адрес (00:11:22:33:44:55)"><input id="res-ip" placeholder="IP-адрес"><input id="res-hostname" placeholder="Имя хоста (опционально)"><div style="display:flex; gap:8px; margin-top:16px;"><button class="btn" onclick="document.getElementById('res-modal').style.display='none'">Отмена</button><button class="btn btn-primary" id="res-save-btn" onclick="saveReservation()">Сохранить</button></div></div></div>
 <div id="toast-container" class="toast-container"></div>
 
@@ -270,20 +244,14 @@ const $ = id => document.getElementById(id);
 const toast = (msg, type = 'success') => {
   const c = $('toast-container'), d = document.createElement('div');
   d.className = `toast ${type}`;
-  d.innerHTML = '<span>' + msg + '</span>';
-  const closeBtn = document.createElement('span');
-  closeBtn.className = 'toast-close'; closeBtn.textContent = '✕';
-  closeBtn.onclick = () => d.remove();
-  d.appendChild(closeBtn);
+  d.innerHTML = `<span>${msg}</span>`;
   if (type === 'error') {
     const cp = document.createElement('span'); cp.className = 'toast-copy'; cp.textContent = '📋'; cp.title = 'Копировать';
     cp.onclick = () => { navigator.clipboard.writeText(msg); cp.textContent = '✅'; setTimeout(() => cp.textContent = '📋', 1500); };
     d.appendChild(cp);
   }
   c.appendChild(d);
-  let timer = setTimeout(() => d.remove(), type === 'error' ? 10000 : 3500);
-  d.addEventListener('mouseenter', () => clearTimeout(timer));
-  d.addEventListener('mouseleave', () => { timer = setTimeout(() => d.remove(), type === 'error' ? 3000 : 1500); });
+  setTimeout(() => d.remove(), type === 'error' ? 10000 : 3500);
 };
 const setLoading = (btnId, loading) => { const b = $(btnId); if (loading) b.classList.add('btn-loading'); else b.classList.remove('btn-loading'); };
 
@@ -373,8 +341,8 @@ const load = async () => {
     const fwd = allZones.filter(z => !z.endsWith('.arpa') && !z.includes('arpa'));
     const rev = allZones.filter(z => z.endsWith('.arpa') || z.includes('arpa'));
     let html = `<div class="zone-item ${curZ === 'all' ? 'active' : ''}" data-zone="all"><span>Все зоны</span></div>`;
-    if (fwd.length) { html += '<div class="zones-group-title">Прямые зоны</div>'; fwd.forEach(z => {const zt=[...new Set(data.filter(r=>r.zone===z).map(r=>r.type))].sort().join(', ');html += `<div class="zone-item ${curZ === z ? 'active' : ''}" data-zone="${z}" title="${d.zones[z]} записей: ${zt}"><span>${z}</span><span class="zone-count">${d.zones[z]}</span><div class="zone-actions"><span class="zone-btn auth-only" title="Проверить зону" onclick="validateZone('${z}')"><svg class="icon" viewBox="0 0 24 24"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg></span></div></div>`;}); }
-    if (rev.length) { html += '<div class="zones-group-title">Обратные зоны</div>'; rev.forEach(z => {const zt=[...new Set(data.filter(r=>r.zone===z).map(r=>r.type))].sort().join(', ');html += `<div class="zone-item ${curZ === z ? 'active' : ''}" data-zone="${z}" title="${d.zones[z]} записей: ${zt}"><span>${z}</span><span class="zone-count">${d.zones[z]}</span><div class="zone-actions"><span class="zone-btn auth-only" title="Проверить зону" onclick="validateZone('${z}')"><svg class="icon" viewBox="0 0 24 24"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg></span></div></div>`;}); }
+    if (fwd.length) { html += '<div class="zones-group-title">Прямые зоны</div>'; fwd.forEach(z => html += `<div class="zone-item ${curZ === z ? 'active' : ''}" data-zone="${z}"><span>${z}</span><span class="zone-count">${d.zones[z]}</span><div class="zone-actions"><span class="zone-btn auth-only" title="Проверить зону" onclick="validateZone('${z}')"><svg class="icon" viewBox="0 0 24 24"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg></span></div></div>`); }
+    if (rev.length) { html += '<div class="zones-group-title">Обратные зоны</div>'; rev.forEach(z => html += `<div class="zone-item ${curZ === z ? 'active' : ''}" data-zone="${z}"><span>${z}</span><span class="zone-count">${d.zones[z]}</span><div class="zone-actions"><span class="zone-btn auth-only" title="Проверить зону" onclick="validateZone('${z}')"><svg class="icon" viewBox="0 0 24 24"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg></span></div></div>`); }
     $('z-list').innerHTML = html;
     const types = ['ALL', ...new Set(data.map(x => x.type))].sort((a, b) => a === 'ALL' ? -1 : b === 'ALL' ? 1 : a.localeCompare(b));
     $('type-f').innerHTML = '<option value="ALL">Все типы</option>' + types.filter(t => t !== 'ALL').map(t => `<option value="${t}">${t}</option>`).join('');
@@ -386,12 +354,6 @@ const load = async () => {
   } catch (e) { console.error(e); } finally { tw.classList.remove('loading'); }
 };
 
-function highlightText(text, query) {
-  if (!query || !text) return text;
-  const idx = text.toLowerCase().indexOf(query.toLowerCase());
-  if (idx === -1) return text;
-  return text.slice(0, idx) + '<mark class="hl">' + text.slice(idx, idx + query.length) + '</mark>' + text.slice(idx + query.length);
-}
 function render() {
   data.sort((a, b) => {
     const aIsRev = a.zone.endsWith('.arpa') || a.zone.includes('arpa');
@@ -406,7 +368,7 @@ function render() {
   data.filter(r => (r.name + r.data).toLowerCase().includes(q) && (curZ === 'all' || r.zone === curZ) && (curT === 'ALL' || r.type === curT) && (curSrc === 'ALL' || r.source === curSrc))
     .forEach(r => {
       let h = `<tr style="${r.issue ? 'background:rgba(239,68,68,0.04)' : ''}">`;
-      h += `<td style="white-space:normal"><span class="rec-name">${highlightText(r.name_esc, q)}</span>${r.issue ? `<span class="issue-tag" title="${r.issue}">⚠</span>` : r.type==='A' && r.data.startsWith('192.168.') ? `<span class="ptr-ok" title="PTR OK">🔄</span>` : ''}${r.mac ? `<div class="mac-addr"><span class="copyable" onclick="navigator.clipboard.writeText('${r.mac_esc.replace(/'/g, "\\'")}');toast('Скопировано: ${r.mac_esc.replace(/'/g, "\\'")}')">${r.mac_esc}<svg class="copy-icon" viewBox="0 0 24 24"><path d="M16 1H4c-1.1 0-2 .9-2 2v14h2V3h12V1zm3 4H8c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h11c1.1 0 2-.9 2-2V7c0-1.1-.9-2-2-2zm0 16H8V7h11v14z"/></svg></span></div>` : ''}</td>`;
+      h += `<td style="white-space:normal">${r.name_esc}${r.issue ? `<span class="issue-tag">${r.issue}</span>` : ''}${r.mac ? `<div class="mac-addr"><span class="copyable" onclick="navigator.clipboard.writeText('${r.mac_esc.replace(/'/g, "\\'")}');toast('Скопировано: ${r.mac_esc.replace(/'/g, "\\'")}')">${r.mac_esc}<svg class="copy-icon" viewBox="0 0 24 24"><path d="M16 1H4c-1.1 0-2 .9-2 2v14h2V3h12V1zm3 4H8c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h11c1.1 0 2-.9 2-2V7c0-1.1-.9-2-2-2zm0 16H8V7h11v14z"/></svg></span></div>` : ''}</td>`;
       h += `<td><span class="type-badge ${r.type}">${r.type_esc}</span></td>`;
       let srcClass = r.source === 'Резервация' ? 'src-tag Резервация' : r.source === 'Динамическая' ? 'src-tag Динамическая' : 'src-tag Статическая';
       h += `<td><span class="${srcClass}">${r.source}</span></td>`;
@@ -419,7 +381,7 @@ function render() {
         t += `<div style="margin-top:3px;font-size:10px;color:var(--muted)">Lease: ${Math.floor(r.lease_remaining / 60)}м</div>`;
       }
       h += `<td>${t}</td>`;
-      h += `<td style="font-family:ui-monospace,SFMono-Regular,monospace;font-size:12px"><span class="copyable" onclick="navigator.clipboard.writeText('${r.data.replace(/'/g, "\\'")}');toast('Скопировано: ${r.data.replace(/'/g, "\\'")}')">${highlightText(r.data, q)}<svg class="copy-icon" viewBox="0 0 24 24"><path d="M16 1H4c-1.1 0-2 .9-2 2v14h2V3h12V1zm3 4H8c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h11c1.1 0 2-.9 2-2V7c0-1.1-.9-2-2-2zm0 16H8V7h11v14z"/></svg></span></td>`;
+      h += `<td style="font-family:ui-monospace,SFMono-Regular,monospace;font-size:12px"><span class="copyable" onclick="navigator.clipboard.writeText('${r.data.replace(/'/g, "\\'")}');toast('Скопировано: ${r.data.replace(/'/g, "\\'")}')">${r.data}<svg class="copy-icon" viewBox="0 0 24 24"><path d="M16 1H4c-1.1 0-2 .9-2 2v14h2V3h12V1zm3 4H8c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h11c1.1 0 2-.9 2-2V7c0-1.1-.9-2-2-2zm0 16H8V7h11v14z"/></svg></span></td>`;
       let a = '';
       if (r.source === 'Динамическая') {
         a += `<span class="fix-btn auth-only" onclick="createReservation('${r.zone_esc}','${r.name_esc}','${r.data}','${r.mac ? r.mac_esc : ''}')" title="Создать резервацию"><svg class="icon" viewBox="0 0 24 24"><path d="M19 13h-6v6h-2v-6H5v-2h6V5h2v6h6v2z"/></svg></span>`;
@@ -461,89 +423,18 @@ async function fix(z, n, ip, t) { if (!confirm('Создать PTR?')) return; t
 async function del(row, z, n, t, d) { if (!confirm(`Удалить ${n}?`)) return; row.classList.add('row-exit'); toast('Удаление...'); await new Promise(r => setTimeout(r, 300)); row.remove(); try { const j = await api('/api/delete', 'POST', { zone: z, name: n, type: t, data: d }); if (j.success) { toast('Запись удалена'); setTimeout(() => load(), 600); } else { toast(j.error || 'Ошибка удаления', 'error'); setTimeout(() => load(), 300); } } catch (e) { toast(e.message || 'Ошибка', 'error'); setTimeout(() => load(), 300); } }
 async function validateZone(z) { toast(`Проверка ${z}...`); try { const j = await api('/api/validate-zone', 'POST', { zone: z }); toast(j.success ? `✅ ${z}: OK` : `❌ ${z}: Ошибка`, j.success ? 'success' : 'error'); } catch (e) { toast('Сетевая ошибка', 'error'); } }
 async function createReservation(zone, name, ip, mac) { if (!mac) { toast('Нет MAC-адреса для создания резервации', 'error'); return; } if (!confirm(`Создать резервацию для ${name} (${mac} → ${ip})?`)) return; try { const j = await api('/api/create-reservation', 'POST', { zone, name, ip, mac, hostname: name }); if (j.success) { toast('Резервация создана'); load(); } else toast(j.error, 'error'); } catch (e) { toast('Сетевая ошибка', 'error'); } }
-async function loadReservations() {
-  const tbody = $('reservations-tbody');
-  const q = ($('res-search').value || '').toLowerCase();
-  try {
-    const d = await api('/api/reservations');
-    tbody.innerHTML = '';
-    let filtered = d.reservations;
-    if (q) filtered = filtered.filter(r => r.mac.includes(q) || r.ip.includes(q) || (r.hostname||'').toLowerCase().includes(q));
-    filtered.forEach(res => {
-      let host = res.hostname || '';
-      tbody.innerHTML += '<tr><td>' + (q ? highlightText(res.mac, q) : res.mac) + '</td><td>' + (q ? highlightText(res.ip, q) : res.ip) + '</td><td>' + (q && host ? highlightText(host, q) : host) + '</td><td><span class="edit-btn" onclick="editReservation(' + "'" + res.mac + "','" + res.ip + "','" + (res.hostname || '') + "')" + '">✏️</span><span class="del-btn" onclick="deleteReservation(' + "'" + res.mac + "')" + '">🗑</span></td></tr>';
-    });
-    if (!filtered.length) tbody.innerHTML = '<tr><td colspan="4" style="text-align:center;color:var(--muted);padding:20px">Ничего не найдено</td></tr>';
-  } catch (e) { toast('Ошибка загрузки резерваций', 'error'); }
-}
+async function loadReservations() { const tbody = $('reservations-tbody'); try { const d = await api('/api/reservations'); tbody.innerHTML = ''; d.reservations.forEach(res => { let host = res.hostname || ''; tbody.innerHTML += `<tr><td>${res.mac}</td><td>${res.ip}</td><td>${host}</td><td><span class="edit-btn" onclick="editReservation('${res.mac}','${res.ip}','${res.hostname || ''}')">✏️</span><span class="del-btn" onclick="deleteReservation('${res.mac}')">🗑</span></td></tr>`; }); } catch (e) { toast('Ошибка загрузки резерваций', 'error'); } }
 function showAddReservation(mac = null, ip = '', hostname = '') { editingReservationMac = mac; const modal = $('res-modal'); modal.style.display = 'flex'; $('res-mac').value = mac || ''; $('res-ip').value = ip; $('res-hostname').value = hostname; $('res-modal-title').textContent = mac ? 'Редактирование резервации' : 'Новая резервация'; $('res-save-btn').textContent = mac ? 'Сохранить изменения' : 'Сохранить'; }
 async function saveReservation() { const mac = $('res-mac').value.trim(); const ip = $('res-ip').value.trim(); const hostname = $('res-hostname').value.trim(); if (!mac || !ip) { toast('Введите MAC и IP', 'error'); return; } try { let j; if (editingReservationMac) { j = await api('/api/reservations/' + encodeURIComponent(editingReservationMac), 'PUT', { mac, ip, hostname }); } else { j = await api('/api/reservations', 'POST', { mac, ip, hostname }); } if (j.success) { $('res-modal').style.display = 'none'; loadReservations(); toast(j.message); editingReservationMac = null; } else { toast(j.error, 'error'); } } catch (e) { toast('Сетевая ошибка', 'error'); } }
 function editReservation(mac, ip, hostname) { showAddReservation(mac, ip, hostname); }
 async function deleteReservation(mac) { if (!confirm(`Удалить резервацию для ${mac}?`)) return; try { const j = await api('/api/reservations/' + encodeURIComponent(mac), 'DELETE'); if (j.success) { loadReservations(); toast('Резервация удалена'); } else toast(j.error, 'error'); } catch (e) { toast('Сетевая ошибка', 'error'); } }
 function switchTab(tab) { $('monitor-main').style.display = (tab === 'monitor') ? 'flex' : 'none'; $('reservations-main').style.display = (tab === 'reservations') ? 'flex' : 'none'; $('tab-monitor').classList.toggle('active', tab === 'monitor'); $('tab-reservations').classList.toggle('active', tab === 'reservations'); if (tab === 'monitor') render(); else if (tab === 'reservations') loadReservations(); }
-let auditOffset = 0, auditTotal = 0;
-async function loadAudit() {
-  const q = $('audit-q').value.trim();
-  const c = $('audit-content');
-  c.textContent = 'Загрузка...';
-  try {
-    const j = await api('/api/audit?offset=' + auditOffset + '&limit=50&q=' + encodeURIComponent(q));
-    c.textContent = j.lines.length ? j.lines.join('\n') : 'Лог пуст';
-    auditTotal = j.total;
-    const page = Math.floor((auditTotal - auditOffset - 1) / 50) + 1;
-    const totalPages = Math.ceil(auditTotal / 50);
-    $('audit-info').textContent = 'Всего: ' + auditTotal;
-    $('audit-page').textContent = auditTotal ? 'Страница ' + page + ' / ' + totalPages : '';
-    $('audit-prev').style.display = (auditOffset + 50 < auditTotal) ? 'inline-flex' : 'none';
-    $('audit-next').style.display = (auditOffset > 0) ? 'inline-flex' : 'none';
-  } catch (e) { c.textContent = 'Ошибка загрузки: ' + (e.message || ''); }
-}
-function auditPage(dir) {
-  if (dir === 1) auditOffset = Math.max(0, auditOffset - 50);
-  else if (dir === -1) auditOffset += 50;
-  if (auditOffset < 0) auditOffset = 0;
-  loadAudit();
-}
-async function showAudit() {
-  $('audit-modal').style.display = 'flex';
-  auditOffset = 0;
-  $('audit-q').value = '';
-  loadAudit();
-}
+async function showAudit() { $('audit-modal').style.display = 'flex'; const c = $('audit-content'); c.textContent = 'Загрузка...'; try { const j = await api('/api/audit'); c.textContent = j.lines.length ? j.lines.join('\n') : 'Лог пуст'; } catch (e) { c.textContent = 'Ошибка загрузки'; } }
 function applyTheme(t) { if (t === 'dark') document.documentElement.setAttribute('data-theme', 'dark'); else if (t === 'light') document.documentElement.setAttribute('data-theme', 'light'); else document.documentElement.removeAttribute('data-theme'); }
-async function openSettings() { try { const s = await api('/api/settings'); $('s-stats-host').value = s.network.stats_host; $('s-bind-host').value = s.network.bind_host || '127.0.0.1'; $('s-stats-port').value = s.network.stats_port; $('s-dnsmasq-leases').value = s.paths.dnsmasq_leases; $('s-bind-conf').value = s.paths.bind_conf; $('s-zones-dir').value = s.paths.zones_dir; $('s-audit-log').value = s.paths.audit_log; $('s-ignored-zones').value = s.dns.ignored_zones.join('\n'); $('s-default-ttl').value = s.dns.default_ttl; $('s-auto-ptr').value = s.dns.auto_ptr.toString(); $('s-refresh-interval').value = s.ui.refresh_interval; $('s-theme').value = s.ui.theme; $('s-secret-key').value = s.security.secret_key; $('s-samesite').value = s.security.session_samesite; $('s-httponly').value = s.security.session_httponly.toString(); $('s-restart-warn').style.display = 'none'; $('settings-modal').style.display = 'flex'; } catch (e) { toast('Ошибка загрузки настроек', 'error'); } }
-async function saveSettings() { const p = { network: { stats_host: $('s-stats-host').value, stats_port: parseInt($('s-stats-port').value), bind_host: $('s-bind-host').value || '127.0.0.1' }, paths: { bind_conf: $('s-bind-conf').value, zones_dir: $('s-zones-dir').value, audit_log: $('s-audit-log').value, dnsmasq_leases: $('s-dnsmasq-leases').value }, dns: { ignored_zones: $('s-ignored-zones').value.split('\n').map(z => z.trim()).filter(z => z), default_ttl: parseInt($('s-default-ttl').value), auto_ptr: $('s-auto-ptr').value === 'true' }, ui: { refresh_interval: parseInt($('s-refresh-interval').value), theme: $('s-theme').value }, security: { secret_key: $('s-secret-key').value, session_samesite: $('s-samesite').value, session_httponly: $('s-httponly').value === 'true' } }; setLoading('s-save-btn', true); try { const j = await api('/api/settings', 'POST', p); if (j.success) { toast('Настройки сохранены'); refreshInterval = p.ui.refresh_interval; applyTheme(p.ui.theme); startAuto(); if (j.restart_needed) $('s-restart-warn').style.display = 'block'; else setTimeout(() => { $('settings-modal').style.display = 'none'; }, 800); } else toast(j.error, 'error'); } catch (e) { toast('Сетевая ошибка', 'error'); } finally { setLoading('s-save-btn', false); } }
+async function openSettings() { try { const s = await api('/api/settings'); $('s-stats-host').value = s.network.stats_host; $('s-stats-port').value = s.network.stats_port; $('s-dnsmasq-leases').value = s.paths.dnsmasq_leases; $('s-bind-conf').value = s.paths.bind_conf; $('s-zones-dir').value = s.paths.zones_dir; $('s-audit-log').value = s.paths.audit_log; $('s-ignored-zones').value = s.dns.ignored_zones.join('\n'); $('s-default-ttl').value = s.dns.default_ttl; $('s-auto-ptr').value = s.dns.auto_ptr.toString(); $('s-refresh-interval').value = s.ui.refresh_interval; $('s-theme').value = s.ui.theme; $('s-secret-key').value = s.security.secret_key; $('s-samesite').value = s.security.session_samesite; $('s-httponly').value = s.security.session_httponly.toString(); $('s-restart-warn').style.display = 'none'; $('settings-modal').style.display = 'flex'; } catch (e) { toast('Ошибка загрузки настроек', 'error'); } }
+async function saveSettings() { const p = { network: { stats_host: $('s-stats-host').value, stats_port: parseInt($('s-stats-port').value) }, paths: { bind_conf: $('s-bind-conf').value, zones_dir: $('s-zones-dir').value, audit_log: $('s-audit-log').value, dnsmasq_leases: $('s-dnsmasq-leases').value }, dns: { ignored_zones: $('s-ignored-zones').value.split('\n').map(z => z.trim()).filter(z => z), default_ttl: parseInt($('s-default-ttl').value), auto_ptr: $('s-auto-ptr').value === 'true' }, ui: { refresh_interval: parseInt($('s-refresh-interval').value), theme: $('s-theme').value }, security: { secret_key: $('s-secret-key').value, session_samesite: $('s-samesite').value, session_httponly: $('s-httponly').value === 'true' } }; setLoading('s-save-btn', true); try { const j = await api('/api/settings', 'POST', p); if (j.success) { toast('Настройки сохранены'); refreshInterval = p.ui.refresh_interval; applyTheme(p.ui.theme); startAuto(); if (j.restart_needed) $('s-restart-warn').style.display = 'block'; else setTimeout(() => { $('settings-modal').style.display = 'none'; }, 800); } else toast(j.error, 'error'); } catch (e) { toast('Сетевая ошибка', 'error'); } finally { setLoading('s-save-btn', false); } }
 function startAuto() { stopAuto(); autoTimer = setInterval(() => { if (!$('m').style.display.includes('flex') && $('search') !== document.activeElement) load(); }, refreshInterval * 1000); }
 function stopAuto() { if (autoTimer) clearInterval(autoTimer); }
-
-// ---------- DNS Lookup ----------
-async function doLookup() {
-  const name = $('lk-name').value.trim();
-  const type = $('lk-type').value;
-  if (!name) { toast('Введите имя', 'error'); return; }
-  const res = $('lk-result');
-  res.textContent = 'Запрос...';
-  setLoading('lk-btn', true);
-  try {
-    const j = await api('/api/dns-lookup?name=' + encodeURIComponent(name) + '&type=' + type);
-    if (j.success) {
-      if (j.records && j.records.length) {
-        res.textContent = j.records.join('\n') + (j.ttl ? '\n\nTTL: ' + j.ttl + 's' : '');
-      } else {
-        res.textContent = j.note || 'Нет записей';
-      }
-    } else {
-      res.textContent = '❌ ' + j.error;
-    }
-  } catch (e) {
-    res.textContent = '❌ Ошибка: ' + (e.message || 'сетевая ошибка');
-  } finally { setLoading('lk-btn', false); }
-}
-function toggleLookup() {
-  const m = $('lookup-modal');
-  m.style.display = m.style.display === 'flex' ? 'none' : 'flex';
-  if (m.style.display === 'flex') $('lk-name').focus();
-}
 
 // ---------- Инициализация ----------
 document.addEventListener('DOMContentLoaded', async () => {
@@ -602,27 +493,11 @@ document.addEventListener('DOMContentLoaded', async () => {
         }
       });
     }
-    if (e.key === 'Enter') {
-      const m = $('m');
-      if (m.style.display === 'flex') { save(); return; }
-      const rm = $('res-modal');
-      if (rm.style.display === 'flex') { saveReservation(); return; }
-      const lm = $('login-modal');
-      if (lm.style.display === 'flex') { doLogin(); return; }
-    }
   });
 
   updateTypeHint();
   load();
   startAuto();
-
-  // SSE: real-time updates on cache change
-  if (window.EventSource) {
-    const es = new EventSource('/api/events');
-    es.addEventListener('update', () => {
-      if (!$('m').style.display.includes('flex')) load();
-    });
-  }
 });
 </script>
 </body>

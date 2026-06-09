@@ -11,7 +11,7 @@ SETTINGS_FILE = os.path.join(BASE_DIR, "settings.json")
 
 DEFAULT_SETTINGS = {
     "security": {"secret_key": "HomeCore-Secret-Key-Change-Me", "session_samesite": "Lax", "session_httponly": True},
-    "network": {"stats_host": "127.0.0.1", "stats_port": 8053},
+    "network": {"stats_host": "127.0.0.1", "stats_port": 8053, "bind_host": "127.0.0.1"},
     "paths": {"bind_conf": "/etc/named.conf.local", "zones_dir": "/var/named/", "audit_log": os.path.join(BASE_DIR, "audit.log"), "dnsmasq_leases": "/var/lib/misc/dnsmasq.leases"},
     "dns": {"ignored_zones": ["localhost", "localhost.localdomain", "localhost.ip6", "127.in-addr.arpa", "0.in-addr.arpa", "255.in-addr.arpa", "0.0.127.in-addr.arpa", "127.0.0", "127.0.0.0", "127.0.0.1", "rpz.local", "rpz", "authors.bind", "hostname.bind", "version.bind", "id.server"], "default_ttl": 3600, "auto_ptr": True},
     "ui": {"refresh_interval": 30, "theme": "system"}
